@@ -1,0 +1,5 @@
+# Environment variables
+export AZURE_CONFIG_DIR=$(pwd)/.azure
+export AZURE_TENANT_ID=xxxxx-xxxx-xxx-xxxxx
+# Configuration folders
+[ -d $(pwd)/.azure ] || mkdir $(pwd)/.azure # Store Azure CLI configuration here
