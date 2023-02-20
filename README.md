@@ -19,11 +19,11 @@ gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<
 gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Alt>Tab']"
 gsettings set org.gnome.shell.window-switcher current-workspace-only "false"
 ```
+## Other stuff to install:
 
-  Azure-CLI
-  Kubectl
-  Kubectx
-  Kubens
-  direnv
-  tfenv
-  
+  - Azure-CLI
+  - Kubectl
+  - Kubectx
+  - Kubens
+  - direnv
+  - tfenv
