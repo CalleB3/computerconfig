@@ -23,7 +23,8 @@ gsettings set org.gnome.shell.window-switcher current-workspace-only "false"
 
   - Azure-CLI
   - Kubectl
-  - Kubectx
-  - Kubens
+  - kubectl krew
+  - Kubectl-ctx
+  - Kubectl-ns
   - direnv
   - tfenv
