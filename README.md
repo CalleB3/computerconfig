@@ -10,6 +10,10 @@ Once zsh is installed also install oh-my-zsh for the initial config
 
 Install Powerlevel10k: https://github.com/romkatv/powerlevel10k
 
+Install Direnv: `curl -sfL https://direnv.net/install.sh | bash`
+
+Install FZF search: https://github.com/junegunn/fzf
+
 ## Fix gnome tabs in Alt+Tab
 
 ```bash
