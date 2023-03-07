@@ -12,17 +12,19 @@ Install Powerlevel10k: https://github.com/romkatv/powerlevel10k
 
 ## Other nice-to-haves
 
-Install homebrew: `https://brew.sh/`
+- Install homebrew: `https://brew.sh/`
 
-Install Direnv: `curl -sfL https://direnv.net/install.sh | bash`
+- Install Direnv: `curl -sfL https://direnv.net/install.sh | bash`
 
-Install Fuzzy-search: https://github.com/junegunn/fzf
+- Install Fuzzy-search: https://github.com/junegunn/fzf
 
-Install tflint: https://github.com/terraform-linters/tflint
+- Install tflint: https://github.com/terraform-linters/tflint
 
-Install tfsec: https://aquasecurity.github.io/tfsec/v1.0.0-rc.1/getting-started/installation/
+- Install tfsec: https://aquasecurity.github.io/tfsec/v1.0.0-rc.1/getting-started/installation/
 
-Install tfenv: https://github.com/tfutils/tfenv
+- Install tfenv: https://github.com/tfutils/tfenv
+
+- Install terraform-docs: https://terraform-docs.io/user-guide/installation/
 
 ## Fix gnome tabs in Alt+Tab
 
