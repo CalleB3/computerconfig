@@ -1,6 +1,6 @@
 # computerconfig
 
-## Zsh
+## Zsh and oh-my-zsh
 
 install zsh: https://github.com/ohmyzsh/ohmyzsh
 
@@ -10,9 +10,19 @@ Once zsh is installed also install oh-my-zsh for the initial config
 
 Install Powerlevel10k: https://github.com/romkatv/powerlevel10k
 
+## Other nice-to-haves
+
+Install homebrew: `https://brew.sh/`
+
 Install Direnv: `curl -sfL https://direnv.net/install.sh | bash`
 
-Install FZF search: https://github.com/junegunn/fzf
+Install Fuzzy-search: https://github.com/junegunn/fzf
+
+Install tflint: https://github.com/terraform-linters/tflint
+
+Install tfsec: https://aquasecurity.github.io/tfsec/v1.0.0-rc.1/getting-started/installation/
+
+Install tfenv: https://github.com/tfutils/tfenv
 
 ## Fix gnome tabs in Alt+Tab
 
@@ -30,5 +40,3 @@ gsettings set org.gnome.shell.window-switcher current-workspace-only "false"
   - kubectl krew
   - Kubectl-ctx
   - Kubectl-ns
-  - direnv
-  - tfenv
