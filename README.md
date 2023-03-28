@@ -1,5 +1,22 @@
 # computerconfig
 
+Customer folders and structure
+
+home/
+  ├── your_name/
+  │   ├── dev/
+  │   │   ├── customer1
+  │   │   │    ├── .envrc_customer1
+  │   │   │    └── .envrc
+  │   │   ├── customer2
+  │   │   │    ├── .envrc_customer2
+  │   │   │    └── .envrc
+  │   │   ├── customer3
+  │   │   │    ├── .envrc_customer3
+  │   │   │    └── .envrc
+  
+  See example files to use for `envrc` files above. The only real difference between customer files are name and `AZURE_TENANT_ID` that gets exported.
+
 ## Zsh and oh-my-zsh
 
 install zsh: https://github.com/ohmyzsh/ohmyzsh
