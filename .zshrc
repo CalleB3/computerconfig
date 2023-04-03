@@ -1,24 +1,96 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# Load bash autocompletion
+autoload -U +X bashcompinit && bashcompinit
+autoload -U +X compinit && compinit
+autoload -U compinit && compinit
+source <(kubectl completion zsh)
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="amuse"
+ZSH_THEME="spaceship"
 alias iw="init-workspace"
 alias la="ll -a"
 alias tf=terraform
 alias k=kubectl
+alias kgn="kubectl get nodes"
 alias kgp="kubectl get pods"
-alias kubens=kubectl-ns
+alias kg="kubectl get"
+alias kubens="kubectl ns"
 alias ctx=kubectl-ctx
 alias aal="az account list -o table"
 alias setsub="az account set --subscription"
+
+
+#SPACESHIP_KUBECONTEXT_SHOW is deprecated. Use SPACESHIP_KUBECTL_CONTEXT_SHOW instead
+#SPACESHIP_KUBECONTEXT_COLOR is deprecated. Use SPACESHIP_KUBECTL_CONTEXT_COLOR instead
+#Warning! The 'pyenv' section was not found. Removing it from the prompt.
+#Warning! The 'vi_mode' section was not found. Removing it from the prompt.
+
+
+export SPACESHIP_PROMPT_ORDER=(
+    # time          # Time stampts section
+    user          # Username section
+    dir           # Current directory section
+    host          # Hostname section
+    git           # Git section (git_branch + git_status)
+    # hg            # Mercurial section (hg_branch  + hg_status)
+    # package       # Package version
+    # node          # Node.js section
+    # ruby          # Ruby section
+    # elm           # Elm section
+    # elixir        # Elixir section
+    # xcode         # Xcode section
+    # swift         # Swift section
+    golang        # Go section
+    # php           # PHP section
+    # rust          # Rust section
+    # haskell       # Haskell Stack section
+    # julia         # Julia section
+    # docker        # Docker section
+    # aws           # Amazon Web Services section
+	gcloud          # gcloud section
+    venv          # virtualenv section
+    # conda         # conda virtualenv section
+    #pyenv         # Pyenv section
+    # dotnet        # .NET section
+    # ember         # Ember.js section
+    kubectl        # Kubectl context section
+    terraform     # Terraform workspace section
+    # exec_time     # Execution time
+    line_sep      # Line break
+    # battery       # Battery level and status
+    #vi_mode       # Vi-mode indicator
+    # jobs          # Background jobs indicator
+    exit_code     # Exit code section
+    char          # Prompt character
+)
+
+export SPACESHIP_HOST_SHOW=true
+export SPACESHIP_DIR_TRUNC=0
+export SPACESHIP_DIR_COLOR=#008700
+export SPACESHIP_DIR_TRUNC_REPO=false
+export SPACESHIP_GIT_BRANCH_COLOR=#af5f00
+export SPACESHIP_KUBECTL_CONTEXT_COLOR=#008787
+export SPACESHIP_KUBECTL_SHOW=true
+export SPACESHIP_KUBECTL_CONTEXT_SHOW=true
+export SPACESHIP_KUBECTL_VERSION_SHOW=false
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -73,6 +145,7 @@ alias setsub="az account set --subscription"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
+
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
@@ -80,9 +153,16 @@ alias setsub="az account set --subscription"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+git
+kubectl
+)
 
 source $ZSH/oh-my-zsh.sh
+
+source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
+PROMPT='$(kube_ps1)'$PROMPT
+PS1='$(kube_ps1)'$PS1
 
 # User configuration
 
@@ -98,6 +178,19 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 # init workspace
+
+az() {
+    if [[ $1 == "aks" && $2 == "get-credentials" ]]; then
+        if [[ ${KUBECONFIG} != "" ]]; then
+            command az $@ --file ${KUBECONFIG}
+        else
+            command az $@
+        fi
+    else
+        command az $@
+    fi
+}
+
 init-workspace() {
     curr_path=$(pwd)
     new_path=$(realpath ~/dev/$1)
@@ -117,9 +210,6 @@ function create-workspace() {
     cd ~/dev/$1
 }
 
-# Load bash autocompletion
-autoload -U +X bashcompinit && bashcompinit
-autoload -U compinit && compinit
 #source /usr/local/etc/bash_completion.d/az # Azure-CLI
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(direnv hook zsh)"
@@ -127,3 +217,9 @@ complete -F __start_kubectl k
 complete -F __start_kubectx ctx
 complete -F __start_kubectl-ctx ctx
 complete -F __start_kubectl-ns kubens
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
